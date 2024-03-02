@@ -1,0 +1,13 @@
+###
+POST http://localhost:3969/api/v1/fund/propose-fund/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsdDk5cXdscDAwMDEyaXNxNjhqb2Vmb2UiLCJlbWFpbCI6InRlc3QxMjNAZ21haWwuY29tIiwicm9sZSI6IlVTRVIiLCJzdXNwZW5kZWQiOmZhbHNlLCJpYXQiOjE3MDkzMzQ3MDQsImV4cCI6MTcwOTM3NzkwNH0.AS8NbcArq4j7yxHwQ6xIdLRuc0wM_U9thlln9PhbhqI
+
+{
+    "companyPan":"12426721222", 
+    "equityPercentage":10, 
+    "equityAmount":1000.0
+}
+
+
+# fundraiserId, equityPercentage, equityAmount

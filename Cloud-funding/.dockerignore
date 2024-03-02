@@ -1,0 +1,12 @@
+node_modules
+.git
+.gitignore
+*.http
+*.drawio
+*.txt
+prisma/*.js
+prisma/migrations
+.env
+*.sql
+*.md
+*.http

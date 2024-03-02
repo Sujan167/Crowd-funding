@@ -1,0 +1,23 @@
+###
+GET http://localhost:3969/api/v1/admin/user/verificaiton-request
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsdDk5cXYyMjAwMDAyaXNxcHdxbGprNWUiLCJlbWFpbCI6Iml0c21leW91cnN1amFuQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsInN1c3BlbmRlZCI6ZmFsc2UsImlhdCI6MTcwOTMzNDk3NCwiZXhwIjoxNzA5Mzc4MTc0fQ.St2H4RvYz9GxEEypN5A7ekAMGEDcnKiRbUcvHz28CTk
+
+###
+PATCH  http://localhost:3969/api/v1/admin/verify-new-registration
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsdDk5cXYyMjAwMDAyaXNxcHdxbGprNWUiLCJlbWFpbCI6Iml0c21leW91cnN1amFuQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsInN1c3BlbmRlZCI6ZmFsc2UsImlhdCI6MTcwOTMzNDk3NCwiZXhwIjoxNzA5Mzc4MTc0fQ.St2H4RvYz9GxEEypN5A7ekAMGEDcnKiRbUcvHz28CTk
+
+{
+    "panNumber": "12426724"
+}
+
+
+###
+DELETE http://10.200.10.59:3969/api/v1/admin/delete-company
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsdDhtbXIzbDAwMDFpYTZ0cG5icHphbXkiLCJlbWFpbCI6Iml0c21leW91cnN1amFuQGdtYWlsLmNvbSIsInJvbGUiOiJBRE1JTiIsInN1c3BlbmRlZCI6ZmFsc2UsImlhdCI6MTcwOTMxNTY3NywiZXhwIjoxNzA5MzU4ODc3fQ.Ljyi6pPGdBU-IyR8RCg43Ckto93EWB2npWQKjedOjZk
+
+{
+    "panNumber": "12341221312323423423423432"
+}

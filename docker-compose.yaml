@@ -1,0 +1,100 @@
+version: "3.8"
+services:
+  express-app:
+    build:
+      context: ./Cloud-funding/
+      dockerfile: Dockerfile
+    ports:
+      - "3969:3969"
+
+    container_name: express-app
+    env_file:
+      - ./Cloud-funding/config/prod.env
+    environment:
+      NODE_ENV: production
+      HOST: express-app
+      DATABASE_URL: mysql://dbuser:changeme@db:3306/cloud_funding
+      
+      RABBITMQ_URL: amqp://rabbitUser:changeme@rabbitmq:5672
+
+    restart: always
+    depends_on:
+      - db
+      - rabbitmq
+
+    networks:
+      - Hackathon-network
+
+  mail-worker-service:
+    build:
+      context: ./Mail-Worker/
+      dockerfile: Dockerfile
+    container_name: worker-service
+    env_file:
+      - ./Mail-Worker/config/prod.env
+    environment:
+      NODE_ENV: production
+      WORKER_HOST: worker-service
+      RABBITMQ_URL: amqp://rabbitUser:changeme@rabbitmq:5672
+    restart: always
+    depends_on:
+      - express-app
+      - rabbitmq
+    
+    networks:
+      - Hackathon-network
+
+  db:
+    image: mysql:latest
+    container_name: mysqldb
+    ports:
+      - 3306:3306
+    restart: always
+
+    environment:
+      MYSQL_ROOT_PASSWORD: changeme
+      MYSQL_PASSWORD: changeme
+      MYSQL_DATABASE: cms
+      MYSQL_USER: dbuser
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./Cloud-funding/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - Hackathon-network
+
+
+  rabbitmq:
+    image: rabbitmq:latest
+    container_name: rabbitmq-container
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbitUser
+      RABBITMQ_DEFAULT_PASS: changeme
+    restart: always
+    ports:
+      - 15672:15672
+      - 5672:5672
+    volumes:
+      - rabbit-data:/var/lib/rabbitmq
+
+    networks:
+      - Hackathon-network
+  # --------------------------------------------------------
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - Hackathon-network
+  # --------------------------------------------------------
+
+networks:
+  Hackathon-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
+  rabbit-data:

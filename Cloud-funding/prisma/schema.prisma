@@ -1,0 +1,81 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+model User {
+  id            String      @id @default(cuid())
+  name          String
+  email         String      @unique
+  contactNumber String      @unique
+  password      String
+  role          Role
+  created_at    DateTime    @default(now())
+  updated_at    DateTime    @updatedAt
+  avatarURL     String?
+  Proposal      Proposal[]
+  suspended     Boolean     @default(false)
+  Company       Company[]
+  Charity       Charity[]
+  Intrested     Intrested[]
+}
+
+model Company {
+  panNumber          String   @id @unique
+  title              String
+  equityAmount       Float
+  equityPercentage   Float
+  startDate          DateTime @default(now())
+  description        String   @db.VarChar(1024)
+  updated_at         DateTime @updatedAt
+  endDate            DateTime
+  name               String
+  logo               String
+  companyDescription String   @db.VarChar(2048)
+  establishment      DateTime
+  valuation          Float
+  document           String
+  verified           Boolean  @default(false)
+  userRefId          String
+  User               User     @relation(fields: [userRefId], references: [id])
+}
+
+model Proposal {
+  id               Int      @id @default(autoincrement())
+  userRefId        String
+  companyPan       String
+  equityPercentage Float
+  equityAmount     Float
+  proposalTime     DateTime @default(now())
+
+  User User @relation(fields: [userRefId], references: [id])
+}
+
+model Charity {
+  id            Int    @id @default(autoincrement())
+  title         String
+  amountRaised  Float?
+  charityAmount Float
+  image         String
+  description   String
+  userRefId     String
+  User          User   @relation(fields: [userRefId], references: [id])
+}
+
+model Intrested {
+  id          Int    @id @default(autoincrement())
+  userRefId   String
+  User        User   @relation(fields: [userRefId], references: [id])
+}

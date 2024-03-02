@@ -1,0 +1,11 @@
+###
+POST http://localhost:3969/api/v1/charity
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsdDk4aXczYzAwMDF4YnF1cjUzcXRuNWUiLCJlbWFpbCI6InRlc3QxMjNAZ21haWwuY29tIiwicm9sZSI6IlVTRVIiLCJzdXNwZW5kZWQiOmZhbHNlLCJpYXQiOjE3MDkzMzI2NjAsImV4cCI6MTcwOTM3NTg2MH0.jQZvjbG4CsWp0rlCRfzgwlelRg-xI_zY8l6vEXSOGAg
+
+{
+    "title":"Very good Charity",
+    "charityAmount": 2342432,
+    "image": "https://res.cloudinary.com/dbqbgk6td/image/upload/v1709331647/logo/l9ikkmt60bzix2trwkc4.jpg",
+    "description": "charity chaiyo"
+}
